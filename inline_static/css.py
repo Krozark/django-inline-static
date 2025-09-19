@@ -21,6 +21,15 @@ class CssUrlTransformer(object):
         \)""",
         re.VERBOSE,
     )
+    IMPORT_PATTERN = re.compile(
+        r"""
+        @import
+        \s*      # any amount of whitespace
+        ([\'"])  # quote
+        (.*?)    # any amount of anything, non-greedily (this is the actual url)
+        \1       # matching quote (or nothing if there was none)
+        \s*      # any amount of whitespace
+        ;""", re.VERBOSE)
 
     def __init__(self, name, path, content, base_url=None):
         self.name = name
@@ -44,7 +53,10 @@ class CssUrlTransformer(object):
         return scheme_domain, base_url.rstrip('/')
 
     def transform(self):
-        return self.URL_PATTERN.sub(self.transform_url, self.content)
+        transformed = self.content
+        transformed = self.IMPORT_PATTERN.sub(self.transform_import, transformed)
+        transformed = self.URL_PATTERN.sub(self.transform_url, transformed)
+        return transformed
 
     def transform_url(self, match):
         return 'url({quote}{url}{quote})'.format(
@@ -60,6 +72,14 @@ class CssUrlTransformer(object):
         if self.base_scheme_domain:
             resolved_url = '{0}/{1}'.format(self.base_scheme_domain, resolved_url.lstrip('/'))
         return resolved_url
+
+    def transform_import(self, match):
+        # recurse on @import to include them
+        from inline_static.templatetags.inline_static_tags import inline_style
+        url = match.group(2)
+        resolve_url = self.resolve_url(url)
+        style = inline_style(resolve_url.lstrip("/"+settings.STATIC_URL))
+        return style
 
 
 def transform_css_urls(*args, **kwargs):

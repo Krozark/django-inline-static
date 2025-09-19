@@ -42,8 +42,8 @@ coverage = {version = ">=5.5", extras = ["toml"]}
 docs = ["Sphinx"]
 
 [build-system]
-requires = ["poetry>=1.1"]
-build-backend = "poetry.masonry.api"
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
 addopts = "-v --tb=short --nomigrations"

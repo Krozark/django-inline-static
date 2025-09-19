@@ -4,7 +4,7 @@ Usage
 Loading static files
 --------------------
 
-To inline any static file in your template, use the ``inline_staticfile`` tag.
+To inline any static file in your template, use the ``inline_static_tags`` tag.
 The inlined content is not marked safe, do this by yourself if you're sure that
 the included content is safe for html documents.
 

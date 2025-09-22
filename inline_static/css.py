@@ -29,7 +29,9 @@ class CssUrlTransformer(object):
         (.*?)    # any amount of anything, non-greedily (this is the actual url)
         \1       # matching quote (or nothing if there was none)
         \s*      # any amount of whitespace
-        ;""", re.VERBOSE)
+        ;""",
+        re.VERBOSE,
+    )
 
     def __init__(self, name, path, content, base_url=None):
         self.name = name
@@ -76,9 +78,12 @@ class CssUrlTransformer(object):
     def transform_import(self, match):
         # recurse on @import to include them
         from inline_static.templatetags.inline_static_tags import inline_style
+
         url = match.group(2)
         resolve_url = self.resolve_url(url)
-        style = inline_style(resolve_url.lstrip("/"+settings.STATIC_URL))
+        if resolve_url.startswith(settings.STATIC_URL):
+            resolve_url = resolve_url[len(settings.STATIC_URL) :]
+        style = inline_style(resolve_url)
         return style
 
 

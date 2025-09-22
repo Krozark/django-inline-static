@@ -1,0 +1,2 @@
+@import "./imported-level-2.css";
+body { background-image: url("../img/level-1.jpg"); }

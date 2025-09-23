@@ -83,8 +83,9 @@ class CssUrlTransformer(object):
         resolve_url = self.resolve_url(url)
         if resolve_url.startswith(settings.STATIC_URL):
             resolve_url = resolve_url[len(settings.STATIC_URL) :]
-        style = inline_style(resolve_url)
-        return style
+            return inline_style(resolve_url)
+
+        return f'@import "{url}";'
 
 
 def transform_css_urls(*args, **kwargs):

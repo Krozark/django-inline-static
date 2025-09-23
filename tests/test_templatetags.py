@@ -83,6 +83,7 @@ class TestInlineStyleTag:
             "",
             'body { background-image: url("/static/img/level-1.jpg"); }',
             "",
+            '@import "https://example.com/css/fake.css";',
             'body { background-image: url("/static/img/noimage.jpg"); }',
             '.extimg { background-image: url("https://placekitten.com/g/200/300"); }',
         ]
@@ -94,6 +95,7 @@ class TestInlineStyleTag:
             "",
             'body { background-image: url("https://cdn.local/img/level-1.jpg"); }',
             "",
+            '@import "https://example.com/css/fake.css";',
             'body { background-image: url("https://cdn.local/img/noimage.jpg"); }',
             '.extimg { background-image: url("https://placekitten.com/g/200/300"); }',
         ]
@@ -105,6 +107,7 @@ class TestInlineStyleTag:
             "",
             'body { background-image: url("https://cdn.local/static/img/level-1.jpg"); }',
             "",
+            '@import "https://example.com/css/fake.css";',
             'body { background-image: url("https://cdn.local/static/img/noimage.jpg"); }',
             '.extimg { background-image: url("https://placekitten.com/g/200/300"); }',
         ]

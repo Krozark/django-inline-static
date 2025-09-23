@@ -79,6 +79,11 @@ class TestInlineStyleTag:
 
     def test_content(self):
         assert inline_static_tags.inline_style('css/all.css').strip().splitlines() == [
+            'body { background-image: url("/static/img/level-2.jpg"); }',
+            "",
+            'body { background-image: url("/static/img/level-1.jpg"); }',
+            "",
+            '@import "https://example.com/css/fake.css";',
             'body { background-image: url("/static/img/noimage.jpg"); }',
             '.extimg { background-image: url("https://placekitten.com/g/200/300"); }',
         ]
@@ -86,6 +91,11 @@ class TestInlineStyleTag:
     def test_content_absolute_static_url(self, settings):
         settings.STATIC_URL = 'https://cdn.local/'
         assert inline_static_tags.inline_style('css/all.css').strip().splitlines() == [
+            'body { background-image: url("https://cdn.local/img/level-2.jpg"); }',
+            "",
+            'body { background-image: url("https://cdn.local/img/level-1.jpg"); }',
+            "",
+            '@import "https://example.com/css/fake.css";',
             'body { background-image: url("https://cdn.local/img/noimage.jpg"); }',
             '.extimg { background-image: url("https://placekitten.com/g/200/300"); }',
         ]
@@ -93,6 +103,11 @@ class TestInlineStyleTag:
     def test_content_absolute_static_url_path(self, settings):
         settings.STATIC_URL = 'https://cdn.local/static/'
         assert inline_static_tags.inline_style('css/all.css').strip().splitlines() == [
+            'body { background-image: url("https://cdn.local/static/img/level-2.jpg"); }',
+            "",
+            'body { background-image: url("https://cdn.local/static/img/level-1.jpg"); }',
+            "",
+            '@import "https://example.com/css/fake.css";',
             'body { background-image: url("https://cdn.local/static/img/noimage.jpg"); }',
             '.extimg { background-image: url("https://placekitten.com/g/200/300"); }',
         ]

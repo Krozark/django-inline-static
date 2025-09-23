@@ -1,2 +1,4 @@
+@import "./imported-level-1.css";
+@import "https://example.com/css/fake.css";
 body { background-image: url("../img/noimage.jpg"); }
 .extimg { background-image: url("https://placekitten.com/g/200/300"); }

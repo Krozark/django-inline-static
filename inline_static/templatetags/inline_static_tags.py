@@ -2,8 +2,8 @@ from django import template
 from django.conf import settings
 from django.utils.safestring import mark_safe
 
-from ..css import transform_css_urls
-from ..loader import load_staticfile
+from inline_static.css import transform_css_urls
+from inline_static.loader import load_staticfile
 
 
 register = template.Library()

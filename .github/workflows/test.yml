@@ -24,12 +24,14 @@ jobs:
         run: |
           set -xe
           python -m pip install --upgrade pip setuptools
-          python -m pip install --upgrade poetry tox tox-gh-actions coverage
+          python -m pip install --upgrade poetry poetry-plugin-export tox tox-gh-actions coverage
 
       - name: "Run tox targets for ${{ matrix.python-version }}"
         run: "python -m tox"
 
       - name: "Upload coverage to Codecov"
-        uses: "codecov/codecov-action@v1"
+        uses: "codecov/codecov-action@v4"
+        if: ${{ github.repository_owner == 'stephrdev' }}
         with:
           fail_ci_if_error: true
+          token: ${{ secrets.CODECOV_TOKEN }}

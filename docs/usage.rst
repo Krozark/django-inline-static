@@ -46,3 +46,31 @@ work after including.
     {% load inline_static_tags %}
 
     <style type="text/css">{% inline_style 'build/all.css' %}</style>
+
+
+Inlining styles in the tags (emails)
+------------------------------------
+
+Mail clients (Gmail, Outlook...) ignore or strip most ``<style>`` tags: the styles must be on
+the tags themselves. The ``inline_html`` block tag renders its content, then copies the css
+into the ``style`` attribute of each tag. It needs the ``email`` extra:
+``pip install "django-inline-static[email]"``.
+
+The ``<style>`` tags of the block and the static css files given as arguments are inlined.
+``var(--x)`` is replaced by its value, and the rules that cannot be inlined (``@media``,
+``:hover``) stay in a ``<style>`` tag.
+
+.. code-block:: text
+
+    {% load inline_static_tags %}
+
+    {% inline_html 'css/email.css' %}
+        <html>
+            <body><p class="lead">Hello</p></body>
+        </html>
+    {% end_inline_html %}
+
+Write the css of an email without nesting: css-inline does not flatten nested rules. The
+function ``inline_static.html.inline_css(html, css=None, **options)`` does the same outside of a
+template.
+

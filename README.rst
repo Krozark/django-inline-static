@@ -29,6 +29,8 @@ Features
 * Template tag to inline javascript files ``inline_javascript``
 * Template tag to inline css files ``inline_style``
 * relative to absolute path converter for paths in css files
+* Block tag ``inline_html`` to copy the css of a document into the ``style`` attribute of its
+  tags (html emails), with the ``email`` extra
 
 
 Requirements

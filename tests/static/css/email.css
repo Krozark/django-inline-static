@@ -1,0 +1,3 @@
+:root { --accent: #00daff; }
+.lead { color: var(--accent); font-size: 18px; }
+@media (max-width: 480px) { .lead { font-size: 14px; } }

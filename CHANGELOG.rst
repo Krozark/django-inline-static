@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.2.0
+-----
+
+* Add the ``inline_html`` block tag and ``inline_static.html.inline_css()``: the css of an
+  html document is copied into the ``style`` attribute of its tags, for emails (needs the
+  ``email`` extra, css-inline). ``var(--x)`` is resolved, ``@media`` rules are kept.
+
 0.1.0 (2019-03-19)
 ------------------
 
